@@ -83,3 +83,12 @@ form a {
     text-decoration:none;
     color:#4a76a8;
 }
+
+.flash{
+    border:2px solid red;
+    border-radius: 7px;
+    background-color: red;
+    color:#FFF;
+    padding:10px;
+    margin-bottom: 15px;
+}
