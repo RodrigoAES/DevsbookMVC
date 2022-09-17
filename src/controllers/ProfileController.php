@@ -70,4 +70,63 @@ class ProfileController extends Controller {
         $this->redirect('/perfil/'.$to);
     }
 
+    public function friends($atts = []) {
+         //Detectando o usuario acessado
+         $id = $this->loggedUser->id;
+         if(!empty($atts['id'])) {
+             $id = $atts['id'];
+         }
+ 
+         //Pegando informações do usuario
+         $user = UserHandler::getUser($id, true);
+         if(!$user){
+             $this->redirect('/');
+         }
+ 
+         $dateFrom = new \DateTime($user->birthdate);
+         $dateTo = new \DateTime('today');
+         $user->ageYears = $dateFrom->diff($dateTo)->y;
+
+         //Verificar se eu sigo o usuario
+        $isFollowing = false;
+        if($user->id != $this->loggedUser->id) {
+            $isFollowing = UserHandler::isFollowing($this->loggedUser->id, $user->id);
+        }
+         
+         $this->render('profile_friends', [
+            'loggedUser' => $this->loggedUser,
+            'user' => $user,
+            'isFollowing' => $isFollowing
+        ]);
+    }
+
+    public function photos($atts = []) {
+        //Detectando o usuario acessado
+        $id = $this->loggedUser->id;
+        if(!empty($atts['id'])) {
+            $id = $atts['id'];
+        }
+
+        //Pegando informações do usuario
+        $user = UserHandler::getUser($id, true);
+        if(!$user){
+            $this->redirect('/');
+        }
+
+        $dateFrom = new \DateTime($user->birthdate);
+        $dateTo = new \DateTime('today');
+        $user->ageYears = $dateFrom->diff($dateTo)->y;
+
+        //Verificar se eu sigo o usuario
+       $isFollowing = false;
+       if($user->id != $this->loggedUser->id) {
+           $isFollowing = UserHandler::isFollowing($this->loggedUser->id, $user->id);
+       }
+        
+        $this->render('profile_photos', [
+           'loggedUser' => $this->loggedUser,
+           'user' => $user,
+           'isFollowing' => $isFollowing
+       ]);
+   }
 }
