@@ -202,6 +202,7 @@ header .head-side {
     justify-content: flex-start;
     flex:1;
 }
+
 .feed .side {
     flex:none;
     width:250px;
@@ -330,12 +331,18 @@ header .head-side {
     text-align: center;
     margin:10px 0;
 }
+.friend-icon.search a {
+    text-align: left;
+    margin:10px 0px;
+}
+
 .friend-icon a {
     text-decoration: none;
 }
 .friend-icon-avatar {
     margin-bottom:5px;
 }
+
 .friend-icon-avatar img {
     width:55px;
     height:55px;
@@ -349,6 +356,10 @@ header .head-side {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.friend-icon-name.search{
+    width:120px;
+    margin-left: 0px
 }
 .profile-photos {
     display: flex;
@@ -437,6 +448,49 @@ header .head-side {
 }
 .button:hover {
     background-color:#477dbb;
+}
+.configUpdate label{
+    font-size:16px;
+    font-weight: 600;
+}
+.configUpdate input{
+    width:60%;
+    height: 40px;
+    padding: 5px 20px;
+    border:none;
+    outline: none;
+
+    font-size: 16px;
+}
+.configUpdate input[type="file"]{
+    margin-left: 30px;
+    padding:0;
+    font-size:12px;
+    height: 20px;
+}
+.configUpdate input[type="submit"]{
+    width:100px;
+}
+.configUpdate .avatar {
+    width:136px;
+}
+.configUpdate .cover{
+    width:400px;
+}
+.titleConfig {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    margin-left: none;
+}
+.flash{
+    width:60%;
+    border:2px solid red;
+    border-radius: 7px;
+    background-color: red;
+    color:#FFF;
+    padding:10px;
+    margin-bottom: 15px;
 }
 
 @media (max-width: 992px) {

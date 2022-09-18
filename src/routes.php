@@ -22,6 +22,11 @@ $router->get('/perfil', 'ProfileController@index');
 $router->get('/amigos', 'Profilecontroller@friends');
 $router->get('/fotos', 'ProfileController@photos');
 
+$router->get('/pesquisar', 'SearchController@index');
+
+$router->get('/config', 'ConfigController@index');
+$router->post('/config','ConfigController@update');
+
 $router->get('/sair', 'LoginController@logout');
 
 

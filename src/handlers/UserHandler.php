@@ -45,6 +45,19 @@ class UserHandler {
 
         return false;
     }
+
+    public static function verifyPassword($id, $password) {
+        $user = User::select()->where('id', $id)->one();
+
+        if($user) {
+            if(password_verify($password, $user['password'])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static function idExists($id) {
         $user = User::select()->where('id', $id)->one();
         return $user ? true : false;
@@ -62,6 +75,7 @@ class UserHandler {
             $user = new User;
             $user->id = $data['id'];
             $user->name = $data['name'];
+            $user->email = $data['email'];
             $user->birthdate = $data['birthdate'];
             $user->city = $data['city'];
             $user->work = $data['work'];
@@ -124,6 +138,52 @@ class UserHandler {
         return $token;
     }
 
+    public static function updateUser($id, $updates) {
+        User::update()
+            ->set('name', $updates['name'])
+            ->set('birthdate', $updates['birthdate'])
+            ->set('email', $updates['email'])
+            ->where('id', $id)
+        ->execute();
+        
+        if($$updates['city']) {
+            User::update()
+                ->set('city', $updates['city'])
+                ->where('id', $id)
+            ->execute();
+        }
+
+        if($updates['work']) {
+            User::update()
+                ->set('work', $updates['work'])
+                ->where('id', $id)
+            ->execute();
+        }
+
+        if($updates['newPassword']) {
+            $hash = password_hash($updates['newPassword'], PASSWORD_DEFAULT);
+
+            User::update()
+                ->set('password', $hash)
+                ->where('id', $id)
+            ->execute();
+        }
+
+        if($updates['newAvatar']) {
+            User::update()
+                ->set('avatar', $updates['newAvatar'])
+                ->where('id', $id)
+            ->execute();
+        }
+
+        if($updates['newCover']) {
+            User::update()
+                ->set('cover', $updates['newCover'])
+                ->where('id', $id)
+            ->execute();
+        }
+    }
+
     public static function isFollowing($from, $to){
         $data = UserRelation::select()
             ->where('user_from', $from)
@@ -148,5 +208,26 @@ class UserHandler {
             ->where('user_from', $from)
             ->where('user_to', $to)
         ->execute();
+    }
+
+    public static function searchUser($term) {
+        $users = [];
+
+        $data = User::select()->where('name', 'like', "%$term%")->get();
+
+        if($data) {
+            foreach($data as $user){
+
+                $newUser = new User;
+                $newUser->id = $user['id'];
+                $newUser->name = $user['name'];
+                $newUser->avatar = $user['avatar'];
+
+                $users[] = $newUser;
+
+            }
+        }
+
+        return $users;
     }
 }
