@@ -241,6 +241,18 @@ header .head-side {
     width:25px;
     height:25px;
 }
+.feed-new-photo {
+    cursor: pointer;
+    margin-right: 15px;
+}
+.feed-new-photo img {
+    height: 20px;
+}
+.feed-new-photo-file{
+    position: absolute;
+    left: -500px;
+    top: -500px;
+}
 
 .banners .box-body {
     margin:0 10px 10px 10px;

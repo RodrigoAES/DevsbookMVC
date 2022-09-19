@@ -1,7 +1,7 @@
 <?=$render('header', ['loggedUser'=> $loggedUser]);?>
 
 <section class="container main">
-    <?= $render('sidebar', ['menuActive' => 'search']); ?>
+    <?= $render('sidebar', ['menuActive' => 'config']); ?>
 
     <section class="feed mt-10">
         <h1 class="titleConfig">Configurações</h1>
